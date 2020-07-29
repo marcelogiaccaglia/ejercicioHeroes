@@ -1,11 +1,12 @@
-/* // Require de Express
-const express = __¿?__;
+// Require de Express
+const express = require("express");
 
 // Require de FS
-const fs = __¿?__;
+const fs = require("fs");
+const { dirname } = require("path");
 
 // Ejecución de Express
-const app = __¿?__;
+const app = express();
 
 // Levantando el Servidor en el puerto 3030
 app.listen(3030, () => console.log('Server running in 3030 port'));
@@ -14,14 +15,16 @@ app.listen(3030, () => console.log('Server running in 3030 port'));
 const heroes = JSON.parse(fs.readFileSync(__dirname + '/data/heroes.json', 'utf-8'));
 
 // Ruta Raíz / ➝ Home
-app.get('/', __¿?__);
-
-// Ruta /heroes ➝ se envía todo el array y Express lo parsea para el browser como JSON :D
-app.get('/heroes', (¿?) => {
-	res.send(ACÁ_DEBERÍAMOS_ENVIAR_A_TODOS_LOS_HÉROES);
+app.get('/', (req, res) => {
+    res.sendFile (__dirname + "/views/index.html");
 });
 
-// Ruta /heroes/n ➝ se envía el nombre y profesión del héroe solicitado
+// Ruta /heroes ➝ se envía todo el array y Express lo parsea para el browser como JSON :D
+app.get('/heroes', (req, res) => {
+	res.send(JSON.parse(fs.readFileSync("./data/heroes.json")));
+});
+
+/*// Ruta /heroes/n ➝ se envía el nombre y profesión del héroe solicitado
 app.get('¿?', (¿?) => {
 	// Acá lo primero será encontrar al héroe que corresponda
 	let heroe = __¿?__;
@@ -48,4 +51,4 @@ app.get('¿?', (¿?) => {
 // Ruta... ¿Pára qué sirve esto?
 app.get('*', (req, res) => {
 	res.status(404).send('404 not found. <br> ¡Houston, poseemos problemas!');
-}); */
+});*/
